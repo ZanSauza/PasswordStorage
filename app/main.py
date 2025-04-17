@@ -4,7 +4,7 @@ from fastapi import FastAPI, Depends
 from utils import json_to_dict_list
 import os
 from pydantic import BaseModel, EmailStr, Field, field_validator, ValidationError
-from typing import Optional, List
+from typing import Optional, List, Any
 from json_db_lite import JSONDatabase
 
 
@@ -33,9 +33,10 @@ class RBPassword:
         self.username: str = username
 
 
+
+
 class PUpdateFilter(BaseModel):
     password_id: int
-
 
 # Определение модели для новых данных пароля
 class PPasswordUpdate(BaseModel):
@@ -45,6 +46,10 @@ class PPasswordUpdate(BaseModel):
     email: EmailStr = Field(default=..., description="email (необязательное поле)"),
     Note: str = Field(default=..., description="примечание (необязательное поле)"),
 
+
+class PDeleteFilter(BaseModel):
+    key: str
+    value: Any
 
 @app.get("/")
 async def root():
@@ -82,7 +87,28 @@ def update_password_handler(filter_password: PUpdateFilter, new_data: PPasswordU
     if check:
         return {"message": "Пароль обновлен!"}
     else:
-        raise HTTPException(status_code=400, detail="Ошибка при обновлении информации")
+        raise HTTPException(status_code=400, detail="Ошибка при обновлении пароля")
+
+
+@app.delete("/dellete_password")
+def delete_password_handler(filter_password: PDeleteFilter):
+    check = dell_password(filter_password.key, filter_password.value)
+    if check:
+        return {"message": "Пароль удален!"}
+    else:
+        raise HTTPException(status_code=400, detail="Ошибка при удалении пароля")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 small_db = JSONDatabase(file_path='passwords.json')
