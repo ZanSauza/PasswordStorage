@@ -102,15 +102,6 @@ def delete_password_handler(filter_password: PDeleteFilter):
 
 
 
-
-
-
-
-
-
-
-
-
 small_db = JSONDatabase(file_path='passwords.json')
 
 
