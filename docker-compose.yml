@@ -4,8 +4,8 @@ services:
     container_name: PStorage_container
     environment:
       POSTGRES_USER: Zan
-      POSTGRES_PASSWORD: postgres_password
-      POSTGRES_DB: postgres_db
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: Password_storage_db
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5430:5432"
@@ -15,10 +15,10 @@ services:
       resources:
         limits:
           cpus: '0.50'
-          memory: 512M
+          memory: 1024M
         reservations:
           cpus: '0.25'
-          memory: 256M
+          memory: 512M
     command: >
       postgres -c max_connections=1000
                -c shared_buffers=256MB
