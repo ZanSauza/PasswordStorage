@@ -4,3 +4,14 @@ uvicorn app.main:app --reload
 
 netstat -ano | findstr :8000
 taskkill /PID 15144 /F
+
+docker-compose up -d
+pip install alembic asyncpg sqlalchemy pydantic-settings
+pip install pydantic-settings
+
+cd app
+alembic init -t async migration
+cd ../
+alembic revision --autogenerate -m "Initial revision"
+
+alembic upgrade head
