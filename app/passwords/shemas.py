@@ -1,9 +1,11 @@
 from datetime import datetime, date
 from typing import Optional
 import re
-from pydantic import BaseModel, Field, EmailStr, validator
+from pydantic import BaseModel, Field, EmailStr, validator, ConfigDict
+
 
 class PPassword(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     password_id: int
     site: str = Field(default=..., description="Ссылка ресурса"),
     username: str = Field(default=..., description="Логин"),
