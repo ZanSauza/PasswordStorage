@@ -6,13 +6,13 @@ from pydantic import BaseModel, Field, EmailStr, validator, ConfigDict
 
 class PPassword(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    password_id: int
-    site: str = Field(default=..., description="Ссылка ресурса"),
-    username: str = Field(default=..., description="Логин"),
-    password: str = Field(default=..., description="Пароль"),
-    email: EmailStr = Field(default=..., description="email (необязательное поле)"),
-    phone_number: str = Field(..., description="Номер телефона в международном формате, начинающийся с '+'")
-    Note: str = Field(default=..., description="примечание (необязательное поле)"),
+    id: int
+    site: str = Field(default=..., description="Ссылка ресурса")
+    user_name: str = Field(default=..., description="Логин")
+    password: str = Field(default=..., description="Пароль")
+    email: EmailStr = Field(default=..., description="email (необязательное поле)")
+    phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
+    note: str = Field(default=..., description="примечание (необязательное поле)")
 
 
     @validator("phone_number")

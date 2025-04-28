@@ -2,10 +2,10 @@
 
 class RBPassword:
     def __init__(self,
-                 password_id: int | None = None,
+                 id: int | None = None,
                  username : str | None = None,
                  email: str | None = None):
-        self.id = password_id
+        self.id = id
         self.username = username
         self.email = email
 
