@@ -1,38 +1,27 @@
-import requests
-from utils import json_to_dict_list
-from pydantic import  ValidationError
-from typing import Optional, List
+import asyncio
+import httpx
 
 
-#
-# def get_passwords_with_param_requests(username: str = None, password_id: int = None):
-#     url = 'http://127.0.0.1:8000/passwords'
-#     params = {}
-#     if username:
-#         params['username'] = username
-#     if password_id:
-#         params['password_id'] = password_id
-#     response = requests.get(url, params=params)
-#     return response.json()
-#
-#
-# passwords = get_passwords_with_param_requests(None, 1)
-# for password in passwords:
-#     print(password)
+async def add_major(site_url: str, user_name: str, password: str, email: str, phone_number: str, note: str):
+    url = 'http://127.0.0.1:8000/passwords/add/'
+    headers = {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        "site": site_url,
+        "user_name": user_name,
+        "password": password,
+        "email": email,
+        "phone_number": phone_number,
+        "note": note
+    }
 
-url = "http://127.0.0.1:8000/add_student"
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, headers=headers, json=data)
+        return response.json()
 
 
-data = {
-    "password_id": 1,
-    "site": "example.com",
-    "username": "myuser",
-    "password": "secretpass",
-    "email": "user@example.com",
-    "Note": "Это тестовая запись"
-}
-
-response = requests.post(url, json=data)
-
-print("Status Code:", response.status_code)
-print("Response JSON:", response.json())
+# вызов функции
+response = asyncio.run(add_major(site_url="http://127.0.0.1:8000", user_name="admin1", password="<PASSWORD>", email="EMAIL1@mail.ru", phone_number="+9121111111", note="test"))
+print(response)

@@ -29,3 +29,27 @@ class PPasswordAdd(BaseModel):
     email: EmailStr = Field(default=..., description="email (необязательное поле)")
     phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
     note: str = Field(default=..., description="примечание (необязательное поле)")
+
+
+class PasswordFilter(BaseModel):
+    """Модель для фильтрации пароля"""
+    id: int
+    user_name: str = Field(default=..., description="Логин")
+    email: EmailStr = Field(default=..., description="email (необязательное поле)")
+    phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
+
+
+class PasswordUpdateData(BaseModel):
+    """Модель для обновления полей пароля"""
+    site: str = Field(default=..., description="Ссылка ресурса")
+    user_name: str = Field(default=..., description="Логин")
+    password: str = Field(default=..., description="Пароль")
+    email: EmailStr = Field(default=..., description="email (необязательное поле)")
+    phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
+    note: str = Field(default=..., description="примечание (необязательное поле)")
+
+class PasswordUpdateRequest(BaseModel):
+    """Модель для запроса обновления пароля"""
+    filters: PasswordFilter
+    updates: PasswordUpdateData
+

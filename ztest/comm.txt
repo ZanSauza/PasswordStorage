@@ -27,6 +27,8 @@ alembic downgrade -1
 Добавляете миграцию (ревизию)
 Обновляете
 
+pip install python-jose bcrypt==4.0.1 passlib[bcrypt]
+
 
 import asyncio
 from logging.config import fileConfig

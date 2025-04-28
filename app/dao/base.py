@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.future import select
+from sqlalchemy import update as sqlalchemy_update, delete as sqlalchemy_delete
 from app.database import async_session_maker
-from app.passwords.models import Password
 
 class BaseDao:
     model = None
@@ -39,3 +39,29 @@ class BaseDao:
                     await session.rollback()
                     raise e
                 return new_instance
+
+    @classmethod
+    async def update(cls, filters: dict, updates: dict) -> bool:
+        async with async_session_maker() as session:
+            stmt = sqlalchemy_update(cls.model).where(
+                *[getattr(cls.model, key) == value for key, value in filters.items()]
+            ).values(**updates)
+            result = await session.execute(stmt)
+            await session.commit()
+            return result.rowcount > 0
+
+    @classmethod
+    async def delete(cls, delete_all: bool = False, **filter_by):
+        if not delete_all and not filter_by:
+            raise ValueError("Необходимо указать хотя бы один параметр для удаления.")
+
+        async with async_session_maker() as session:
+            async with session.begin():
+                query = sqlalchemy_delete(cls.model).filter_by(**filter_by)
+                result = await session.execute(query)
+                try:
+                    await session.commit()
+                except SQLAlchemyError as e:
+                    await session.rollback()
+                    raise e
+                return result.rowcount
