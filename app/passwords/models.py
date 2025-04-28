@@ -1,3 +1,4 @@
+from pydantic.v1 import BaseModel
 from sqlalchemy import ForeignKey, text, Text
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.database import Base, str_uniq, int_pk, str_null_true
@@ -34,3 +35,6 @@ class Password(Base):
             "note": self.note,
 
         }
+
+
+

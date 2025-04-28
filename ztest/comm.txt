@@ -20,7 +20,12 @@ alembic revision --autogenerate -m "init"
 alembic upgrade head
 alembic downgrade -1
 
-
+Создаете папку
+Наполняете ее файлами
+Описываете модели
+В файле migration/env.py добавляете корректные импорты моделей как на примере выше
+Добавляете миграцию (ревизию)
+Обновляете
 
 
 import asyncio
