@@ -1,10 +1,10 @@
 from sqlalchemy import select
 
-from app.dao.base import BaseDao
+from app.dao.base import BaseDAO
 from app.database import async_session_maker
 from app.passwords.models import Password
 
-class PasswordDAO(BaseDao):
+class PasswordDAO(BaseDAO):
     model = Password
 
     @classmethod

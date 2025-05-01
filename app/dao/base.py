@@ -3,7 +3,7 @@ from sqlalchemy.future import select
 from sqlalchemy import update as sqlalchemy_update, delete as sqlalchemy_delete
 from app.database import async_session_maker
 
-class BaseDao:
+class BaseDAO:
     model = None
 
     @classmethod

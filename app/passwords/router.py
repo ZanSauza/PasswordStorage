@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from app.passwords.dao import PasswordDAO
 from app.passwords.rb import RBPassword
-from app.passwords.shemas import PPassword, PPasswordAdd, PasswordUpdateRequest
+from app.passwords.shemas import PPassword, PPasswordAdd, PPasswordUpdateRequest
 
 router = APIRouter(prefix="/passwords", tags=["passwords"])
 
@@ -36,7 +36,7 @@ async def add_password(password: PPasswordAdd) -> dict:
 
 
 @router.put("/update_password", summary="Обновить пароль")
-async def update_password(request: PasswordUpdateRequest) -> dict:
+async def update_password(request: PPasswordUpdateRequest) -> dict:
     # Преобразуем фильтры и обновления в словари
     filters = request.filters.dict(exclude_none=True)
     updates = request.updates.dict(exclude_none=True)
