@@ -4,12 +4,14 @@ from pydantic import EmailStr
 class RBPassword:
     def __init__(self,
                  password_id: int | None = None,
+                 site_name: str | None = None,
                  user_name : str | None = None,
                  email: str | None = None,
                  password: str | None = None,
                  phone_number: str | None = None,
                  note: str | None = None):
         self.id = password_id
+        self.site_name = site_name
         self.user_name = user_name
         self.email = email
         self.password = password
@@ -19,6 +21,7 @@ class RBPassword:
     def to_dict(self) -> dict:
         data = {
             "id": self.id,
+            "site_name": self.site_name,
             "user_name": self.user_name,
             "email": self.email,
             "password": self.password,

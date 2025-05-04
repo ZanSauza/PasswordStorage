@@ -15,7 +15,7 @@ alembic init -t async migration
 script_location = app/migration
 
 cd ../
-alembic revision --autogenerate -m "init"
+alembic revision --autogenerate -m "site_name"
 
 alembic upgrade head
 alembic downgrade -1
@@ -25,7 +25,11 @@ pip install python-jose bcrypt==4.0.1 passlib[bcrypt]
 alembic revision --autogenerate -m "create users table"
 alembic upgrade head
 
-
+docker exec -it cdf5cbe6e930 bash
+psql -U Zan -d Password_storage_db
+\d passwords
+ALTER TABLE passwords DROP CONSTRAINT passwords_phone_number_key;
+q
 
 Создаете папку
 Наполняете ее файлами

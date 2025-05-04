@@ -7,6 +7,7 @@ from app.database import Base, str_uniq, int_pk, str_null_true
 
 class Password(Base):
     id: Mapped[int_pk]
+    site_name: Mapped[str]
     site: Mapped[str]
     user_name: Mapped[str]
     password: Mapped[str]
@@ -27,6 +28,7 @@ class Password(Base):
     def to_dict(self):
         return {
             "id": self.id,
+            "site_name": self.site_name,
             "site": self.site,
             "user_name": self.user_name,
             "password": self.password,
