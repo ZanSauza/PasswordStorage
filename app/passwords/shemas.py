@@ -34,9 +34,6 @@ class PPasswordAdd(BaseModel):
 class PPasswordFilter(BaseModel):
     """Модель для фильтрации пароля"""
     id: int
-    user_name: str = Field(default=..., description="Логин")
-    email: EmailStr = Field(default=..., description="email (необязательное поле)")
-    phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
 
 
 class PPasswordUpdateData(BaseModel):
