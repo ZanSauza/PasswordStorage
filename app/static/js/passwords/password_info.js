@@ -8,6 +8,8 @@ function enableEdit(button) {
     const card = button.closest(".password-card");
     const table = card.querySelector("table");
     const cells = table.querySelectorAll("td");
+    const details = card.querySelector(".password-details");
+    details.classList.toggle("hidden");
 
     cells.forEach(cell => {
         cell.contentEditable = "true";

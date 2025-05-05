@@ -1,39 +1,58 @@
-async function saveChanges(button) {
-    const card = button.closest(".password-card");
-    const id = card.getAttribute("data-id");
-    const cells = card.querySelectorAll("td");
+function openModal(password) {
+    document.getElementById("edit-id").value = password.id;
+    document.getElementById("edit-username").value = password.user_name || "";
+    document.getElementById("edit-email").value = password.email || "";
+    document.getElementById("edit-password").value = password.password || "";
+    document.getElementById("edit-phone").value = password.phone_number || "";
+    document.getElementById("edit-site").value = password.site_name || "";
+    document.getElementById("edit-note").value = password.note || "";
 
-    const data = {
-        filters: { id: parseInt(id) },
+    document.getElementById("editModal").classList.remove("hidden");
+}
+
+function closeModal() {
+    document.getElementById("editModal").classList.add("hidden");
+}
+
+async function submitEdit() {
+    const id = parseInt(document.getElementById("edit-id").value);
+    const user_name = document.getElementById("edit-username").value;
+    const email = document.getElementById("edit-email").value;
+    const password = document.getElementById("edit-password").value;
+    const phone_number = document.getElementById("edit-phone").value;
+    const site_name = document.getElementById("edit-site").value;
+    const note = document.getElementById("edit-note").value;
+
+
+
+    const payload = {
+        filters: { id },
         updates: {
-            user_name: cells[0].innerText.trim(),
-            email: cells[1].innerText.trim(),
-            password: cells[2].innerText.trim(),
-            phone_number: cells[3].innerText.trim(),
-            site: cells[4].innerText.trim(),
-            note: cells[5].innerText.trim()
+            user_name,
+            email,
+            password,
+            phone_number,
+            site_name,
+            note
         }
     };
+        console.log("Data to update:", payload);
 
-    console.log("Data to update:", data);
-
-    const response = await fetch("/passwords/update_password", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-    console.log(result);
-    alert(result.message);
-
-    if (response.ok) {
-        cells.forEach(cell => {
-            cell.contentEditable = "false";
-            cell.style.backgroundColor = "";
+    try {
+        const response = await fetch("/passwords/update_password", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
         });
-        button.classList.add("hidden");
+
+        const result = await response.json();
+
+        if (response.ok) {
+            closeModal();
+            location.reload();
+        }
+    } catch (err) {
+        alert("Ошибка при сохранении");
+        console.error(err);
     }
 }
