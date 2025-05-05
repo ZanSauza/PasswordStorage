@@ -22,13 +22,15 @@ alembic downgrade -1
 
 pip install jinja2
 pip install python-jose bcrypt==4.0.1 passlib[bcrypt]
-alembic revision --autogenerate -m "create users table"
+alembic revision --autogenerate -m "site name"
 alembic upgrade head
 
-docker exec -it cdf5cbe6e930 bash
+docker ps
+docker exec -it f5a58977dab6 bash
 psql -U Zan -d Password_storage_db
 \d passwords
-ALTER TABLE passwords DROP CONSTRAINT passwords_phone_number_key;
+ALTER TABLE passwords DROP CONSTRAINT passwords_email_key1;
+ALTER TABLE passwords DROP CONSTRAINT passwords_phone_number_key1;
 q
 
 Создаете папку

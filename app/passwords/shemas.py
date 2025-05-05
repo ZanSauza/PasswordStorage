@@ -23,6 +23,7 @@ class PPassword(BaseModel):
 
 
 class PPasswordAdd(BaseModel):
+    site_name: str = Field(default=..., description="Имя ресурса")
     site: str = Field(default=..., description="Ссылка ресурса")
     user_name: str = Field(default=..., description="Логин")
     password: str = Field(default=..., description="Пароль")

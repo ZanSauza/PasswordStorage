@@ -1,22 +1,44 @@
 function toggleDetails(button) {
-    const card = button.closest(".password-card");
-    const details = card.querySelector(".password-details");
-    details.classList.toggle("hidden");
+    const details = button.closest('.password-card').querySelector('.password-details');
+    const editButton = button.previousElementSibling;
+
+    details.classList.toggle('hidden');
+    if (details.classList.contains('hidden')) {
+        button.textContent = 'Показать';
+        editButton.classList.add('hidden');
+    } else {
+        button.textContent = 'Скрыть';
+        editButton.classList.remove('hidden');
+    }
 }
 
-function enableEdit(button) {
-    const card = button.closest(".password-card");
-    const table = card.querySelector("table");
-    const cells = table.querySelectorAll("td");
-    const details = card.querySelector(".password-details");
-    details.classList.toggle("hidden");
+function copyToClipboard(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
 
-    cells.forEach(cell => {
-        cell.contentEditable = "true";
-        cell.style.backgroundColor = "#fff2b2";
-    });
+    input.select();
+    input.setSelectionRange(0, 99999);
 
-    const saveBtn = card.querySelector(".save-btn");
-    saveBtn.classList.remove("hidden");
+    try {
+        const success = document.execCommand('copy');
+        if (success) {
+            showCopyToast("скопировано");
+        } else {
+            console.error("Не удалось скопировать");
+        }
+    } catch (err) {
+        console.error("Ошибка копирования:", err);
+    }
+
+    window.getSelection().removeAllRanges();
 }
 
+
+function showCopyToast(message) {
+    const toast = document.getElementById("copy-toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
