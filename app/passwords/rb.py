@@ -2,14 +2,18 @@ from pydantic import EmailStr
 
 
 class RBPassword:
-    def __init__(self,
-                 password_id: int | None = None,
-                 site_name: str | None = None,
-                 user_name : str | None = None,
-                 email: str | None = None,
-                 password: str | None = None,
-                 phone_number: str | None = None,
-                 note: str | None = None):
+    def __init__(
+        self,
+        user_id: int | None = None,              
+        password_id: int | None = None,
+        site_name: str | None = None,
+        user_name: str | None = None,
+        email: str | None = None,
+        password: str | None = None,
+        phone_number: str | None = None,
+        note: str | None = None
+    ):
+        self.user_id = user_id
         self.id = password_id
         self.site_name = site_name
         self.user_name = user_name
@@ -20,6 +24,7 @@ class RBPassword:
 
     def to_dict(self) -> dict:
         data = {
+            "user_id": self.user_id,
             "id": self.id,
             "site_name": self.site_name,
             "user_name": self.user_name,
@@ -29,6 +34,4 @@ class RBPassword:
             "note": self.note
         }
 
-
-        filtered_data = {key: value for key, value in data.items() if value is not None}
-        return filtered_data
+        return {key: value for key, value in data.items() if value is not None}

@@ -7,6 +7,7 @@ from app.database import Base, str_uniq, int_pk, str_null_true
 
 class Password(Base):
     id: Mapped[int_pk]
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
     site_name: Mapped[str]
     site: Mapped[str]
     user_name: Mapped[str]
@@ -14,6 +15,9 @@ class Password(Base):
     phone_number: Mapped[str_uniq] = mapped_column(nullable=True)
     email: Mapped[str_uniq] = mapped_column(nullable=True)
     note: Mapped[str] = mapped_column(nullable=True)
+
+    user = relationship("User", back_populates="passwords")
+
 
 
 

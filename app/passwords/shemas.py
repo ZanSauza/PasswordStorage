@@ -10,14 +10,13 @@ class PPassword(BaseModel):
     site: str = Field(default=..., description="Ссылка ресурса")
     user_name: str = Field(default=..., description="Логин")
     password: str = Field(default=..., description="Пароль")
-    email: EmailStr = Field(default=..., description="email (необязательное поле)")
-    phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
-    note: str = Field(default=..., description="примечание (необязательное поле)")
-
+    email: Optional[EmailStr] = Field(None, description="email (необязательное поле)")
+    phone_number: Optional[str] = Field(None, description="Номер телефона в международном формате")
+    note: Optional[str] = Field(None, description="примечание (необязательное поле)")
 
     @validator("phone_number")
     def validate_phone_number(cls, value):
-        if not re.match(r'^\+\d{1,15}$', value):
+        if value is not None and not re.match(r'^\+\d{1,15}$', value):
             raise ValueError('Номер телефона должен начинаться с "+" и содержать от 1 до 15 цифр')
         return value
 
@@ -27,9 +26,10 @@ class PPasswordAdd(BaseModel):
     site: str = Field(default=..., description="Ссылка ресурса")
     user_name: str = Field(default=..., description="Логин")
     password: str = Field(default=..., description="Пароль")
-    email: EmailStr = Field(default=..., description="email (необязательное поле)")
-    phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
-    note: str = Field(default=..., description="примечание (необязательное поле)")
+    email: Optional[EmailStr] = Field(None, description="email (необязательное поле)")
+    phone_number: Optional[str] = Field(None, description="Номер телефона в международном формате")
+    note: Optional[str] = Field(None, description="примечание (необязательное поле)")
+    user_id: Optional[int] = Field(None, exclude=True)
 
 
 class PPasswordFilter(BaseModel):
@@ -42,9 +42,9 @@ class PPasswordUpdateData(BaseModel):
     site: str = Field(default=..., description="Ссылка ресурса")
     user_name: str = Field(default=..., description="Логин")
     password: str = Field(default=..., description="Пароль")
-    email: EmailStr = Field(default=..., description="email (необязательное поле)")
-    phone_number: str = Field(default=..., description="Номер телефона в международном формате, начинающийся с '+'")
-    note: str = Field(default=..., description="примечание (необязательное поле)")
+    email: Optional[EmailStr] = Field(None, description="email (необязательное поле)")
+    phone_number: Optional[str] = Field(None, description="Номер телефона в международном формате")
+    note: Optional[str] = Field(None, description="примечание (необязательное поле)")
 
 class PPasswordUpdateRequest(BaseModel):
     """Модель для запроса обновления пароля"""

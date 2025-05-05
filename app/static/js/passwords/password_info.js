@@ -1,14 +1,19 @@
 function toggleDetails(button) {
-    const details = button.closest('.password-card').querySelector('.password-details');
-    const editButton = button.previousElementSibling;
+    const card = button.closest('.password-card');
+    const details = card.querySelector('.password-details');
+    const editButton = card.querySelector('.edit-btn');
+    const deleteButton = card.querySelector('.delete-btn');
 
     details.classList.toggle('hidden');
+
     if (details.classList.contains('hidden')) {
         button.textContent = 'Показать';
         editButton.classList.add('hidden');
+        deleteButton.classList.add('hidden');
     } else {
         button.textContent = 'Скрыть';
         editButton.classList.remove('hidden');
+        deleteButton.classList.remove('hidden');
     }
 }
 

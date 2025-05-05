@@ -15,7 +15,7 @@ alembic init -t async migration
 script_location = app/migration
 
 cd ../
-alembic revision --autogenerate -m "site_name"
+alembic revision --autogenerate -m "user"
 
 alembic upgrade head
 alembic downgrade -1
@@ -26,11 +26,12 @@ alembic revision --autogenerate -m "site name"
 alembic upgrade head
 
 docker ps
-docker exec -it f5a58977dab6 bash
+docker exec -it cdf5cbe6e930 bash
+
 psql -U Zan -d Password_storage_db
 \d passwords
-ALTER TABLE passwords DROP CONSTRAINT passwords_email_key1;
-ALTER TABLE passwords DROP CONSTRAINT passwords_phone_number_key1;
+ALTER TABLE passwords DROP CONSTRAINT passwords_email_key;
+ALTER TABLE passwords DROP CONSTRAINT passwords_phone_number_key;
 q
 
 Создаете папку

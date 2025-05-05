@@ -29,3 +29,4 @@ class PUserChangeRole(BaseModel):
 
     class Config:
         from_attributes = True
+

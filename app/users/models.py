@@ -1,10 +1,13 @@
 from sqlalchemy import text
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base, str_uniq, int_pk
+from sqlalchemy.orm import relationship
+
 
 
 class User(Base):
     id: Mapped[int_pk]
+    passwords = relationship("Password", back_populates="user", cascade="all, delete-orphan")
     phone_number: Mapped[str_uniq]
     first_name: Mapped[str]
     last_name: Mapped[str]
