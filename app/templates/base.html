@@ -6,13 +6,21 @@
     <link rel="icon" href="/static/img/passwords/logo.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="/static/css/passwords/passwords.css">
     <link rel="stylesheet" type="text/css" href="/static/css/users/users.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/users/users.css">
 </head>
 
 <body>
     {% block userinfo %}
         <header class="header">
             <img class="header-img" src="/static/img/passwords/logo.png" width="40px" height="40px">
+                <div class="auth-button">
+                    {% if user %}
+                        <form method="post" action="/pages/logout">
+                            <button type="submit">Выйти</button>
+                        </form>
+                    {% else %}
+                        <a href="/pages/login"><button type="button">Войти</button></a>
+                    {% endif %}
+                </div>
         </header>
     {% endblock userinfo %}
 

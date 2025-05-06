@@ -18,7 +18,10 @@
 
         <label for="last_name">Фамилия:</label>
         <input type="text" id="last_name" name="last_name" required>
-        <button type="submit" id="reg-button" class="submit-button" onclick="regFunction(event)">Зарегистрироваться</button>    </form>
+        <button type="submit" id="reg-button" class="submit-button" onclick="regFunction(event)">Зарегистрироваться</button>
+        <button type="button" class="redirect_auth" onclick="window.location.href='/pages/login'">Войти</button>
+
+    </form>
 </div>
 <script src="/static/js/users/users_reg.js"></script>
 

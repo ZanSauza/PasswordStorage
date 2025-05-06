@@ -1,14 +1,12 @@
-from fastapi import  HTTPException, status
-
+from fastapi import  HTTPException, status, Request
 from fastapi import Depends
-from sqlalchemy.ext.asyncio import async_session
-
 from app.database import async_session_maker
-from app.users.auth import get_current_user, get_token
+from app.users.auth import get_current_user
 from app.users.models import User
 from sqlalchemy import update as sqlalchemy_update
-
 from app.users.schemas import PUserChangeRole
+from jose import JWTError
+
 
 
 async def get_current_admin_user(current_user: User = Depends(get_current_user)):
@@ -49,3 +47,13 @@ async def change_admin_status(user_id: int, new_status: bool, current_user: User
     except Exception as e:
         print(f"Error updating admin status: {e}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="не удалось обновить статус")
+
+
+
+async def get_current_user_optional(request: Request) -> User | None:
+    try:
+        return await get_current_user(request)
+    except JWTError:
+        return None
+    except Exception:
+        return None
