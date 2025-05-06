@@ -3,8 +3,8 @@ services:
     image: postgres:latest
     container_name: PStorage_container
     environment:
-      POSTGRES_USER: Zan
-      POSTGRES_PASSWORD: admin123
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: Password_storage_db
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:

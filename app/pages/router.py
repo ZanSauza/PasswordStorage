@@ -12,6 +12,7 @@ router = APIRouter(prefix='/pages', tags=['frontend'])
 templates = Jinja2Templates(directory='app/templates')
 
 
+
 @router.get("/passwords/", response_class=HTMLResponse)
 async def get_passwords_page(request: Request, user: User = Depends(get_current_user)):
     passwords = await PasswordDAO.find_all(user_id=user.id)

@@ -1,12 +1,6 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/users/users.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %} Регистрация {% endblock title %}
+{% block content %}
 <div class="container">
     <h1>Регистрация</h1>
     <form id="registration-form" class="registration-form">
@@ -26,8 +20,6 @@
         <input type="text" id="last_name" name="last_name" required>
         <button type="submit" id="reg-button" class="submit-button" onclick="regFunction(event)">Зарегистрироваться</button>    </form>
 </div>
-
-<!-- Подключаем внешний JavaScript-файл -->
 <script src="/static/js/users/users_reg.js"></script>
-</body>
-</html>
+
+{% endblock content%}

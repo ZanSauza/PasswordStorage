@@ -1,24 +1,13 @@
-pip install -r req.txt
+pip install -r requirements.txt
 uvicorn app.main:app
 uvicorn app.main:app --reload
 
 netstat -ano | findstr :8000
 taskkill /PID 15144 /F
 
-docker-compose up -d
 pip install alembic asyncpg sqlalchemy pydantic-settings
 pip install pydantic-settings
 
-cd app
-alembic init -t async migration
-
-script_location = app/migration
-
-cd ../
-alembic revision --autogenerate -m "user"
-
-alembic upgrade head
-alembic downgrade -1
 
 pip install jinja2
 pip install python-jose bcrypt==4.0.1 passlib[bcrypt]
@@ -46,25 +35,6 @@ q
 
 
 
-import asyncio
-from logging.config import fileConfig
-from sqlalchemy import pool
-from sqlalchemy.engine import Connection
-from sqlalchemy.ext.asyncio import async_engine_from_config
-from alembic import context
 
-import sys
-from os.path import dirname, abspath
-
-sys.path.insert(0, dirname(dirname(abspath(__file__))))
-
-from app.database import DATABASE_URL, Base
-from app.passwords.models import Password
-
-config = context.config
-config.set_main_option("sqlalchemy.url", DATABASE_URL)
-if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
-
-target_metadata = Base.metadata
-
+import secrets
+print(secrets.token_urlsafe(64))

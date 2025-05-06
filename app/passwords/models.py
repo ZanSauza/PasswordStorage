@@ -1,7 +1,6 @@
-from pydantic.v1 import BaseModel
-from sqlalchemy import ForeignKey, text, Text
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from app.database import Base, str_uniq, int_pk, str_null_true
+from app.database import Base, int_pk
 
 
 
@@ -12,8 +11,8 @@ class Password(Base):
     site: Mapped[str]
     user_name: Mapped[str]
     password: Mapped[str]
-    phone_number: Mapped[str_uniq] = mapped_column(nullable=True)
-    email: Mapped[str_uniq] = mapped_column(nullable=True)
+    phone_number: Mapped[str] = mapped_column(nullable=True)
+    email: Mapped[str] = mapped_column(nullable=True)
     note: Mapped[str] = mapped_column(nullable=True)
 
     user = relationship("User", back_populates="passwords")
@@ -41,6 +40,3 @@ class Password(Base):
             "note": self.note,
 
         }
-
-
-
