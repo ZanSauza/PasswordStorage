@@ -11,6 +11,7 @@
 <body>
     {% block userinfo %}
         <header class="header">
+            <div class="header-container">
             <img class="header-img" src="/static/img/passwords/logo.png" width="40px" height="40px">
                 <div class="auth-button">
                     {% if user %}
@@ -21,12 +22,19 @@
                         <a href="/pages/login"><button type="button">Войти</button></a>
                     {% endif %}
                 </div>
+            </div>
         </header>
     {% endblock userinfo %}
 
     {% block content %}
     {% endblock content%}
-
-
+    {% block bottom%}
+    <header class="bottom-header">
+        <div class="header-container2">
+            <img class="header-img" src="/static/img/passwords/logo.png" width="40px" height="40px">
+        </div>
+    </header>
+    {% endblock bottom%}
+    <script src="/static/js/users/scroll_bottom.js"></script>
 </body>
 </html>

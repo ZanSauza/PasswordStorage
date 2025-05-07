@@ -38,5 +38,6 @@ class Password(Base):
             "phone_number": self.phone_number,
             "email": self.email,
             "note": self.note,
+            "user_id": self.user_id,
 
         }

@@ -34,12 +34,10 @@ class PPasswordAdd(BaseModel):
 
 
 class PPasswordFilter(BaseModel):
-    """Модель для фильтрации пароля"""
     id: int
 
 
 class PPasswordUpdateData(BaseModel):
-    """Модель для обновления полей пароля"""
     site: str = Field(default=..., description="Ссылка ресурса")
     user_name: str = Field(default=..., description="Логин")
     password: str = Field(default=..., description="Пароль")
@@ -50,7 +48,6 @@ class PPasswordUpdateData(BaseModel):
 
 
 class PPasswordUpdateRequest(BaseModel):
-    """Модель для запроса обновления пароля"""
     filters: PPasswordFilter
     updates: PPasswordUpdateData
 

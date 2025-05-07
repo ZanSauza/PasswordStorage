@@ -77,11 +77,11 @@ async def update_password(
 
 
 @router.delete("/delete/{id:int}")
-async def delete_major(
+async def delete_password(
     id: int,
     current_user: User = Depends(get_current_user)) -> dict:
     existing = await PasswordDAO.find_full_data(id)
-    if not existing or existing.user_id != current_user.id:
+    if not existing or existing['user_id'] != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Нет доступа к удалению")
 
     check = await PasswordDAO.delete(id=id)

@@ -51,6 +51,6 @@ async def get_all_users(user_data: User = Depends(get_current_admin_user)):
 
 
 
-@router.put("/users/{user_id}/admin") # Не нужно указывать Depends здесь
+@router.put("/users/{user_id}/admin")
 async def update_admin_status_route(user_id: int, new_status: bool = Body(...), current_user: User = Depends(get_current_user)):
     return await change_admin_status(user_id, new_status, current_user=current_user) #

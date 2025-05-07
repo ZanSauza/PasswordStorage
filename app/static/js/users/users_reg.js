@@ -48,7 +48,7 @@ function displayErrors(errorData) {
                 return error.msg || 'Произошла ошибка';
             }).join('\n');
         } else {
-            // Обработка одиночной ошибки
+
             message = errorData.detail || 'Произошла ошибка';
         }
     }

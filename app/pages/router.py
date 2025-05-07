@@ -4,14 +4,12 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from app.users.models import User
 from app.passwords.dao import PasswordDAO
-from app.passwords.router import get_all_passwords
 from app.users.auth import get_current_user
 from fastapi.responses import RedirectResponse
 
 
 router = APIRouter(prefix='/pages', tags=['frontend'])
 templates = Jinja2Templates(directory='app/templates')
-
 
 
 
@@ -33,5 +31,5 @@ async def get_register_page(request: Request):
 @router.post('/logout', name='logout')
 async def logout():
     response = RedirectResponse(url="/pages/login", status_code=303)
-    response.delete_cookie("access_token")  # Или другое имя, если ты используешь другое
+    response.delete_cookie("access_token")
     return response

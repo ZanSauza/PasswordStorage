@@ -11,7 +11,7 @@ async function loginFunction(event) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            credentials: 'include', // чтобы куки сохранялись
+            credentials: 'include',
             body: JSON.stringify(data)
         });
 

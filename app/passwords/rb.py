@@ -1,5 +1,3 @@
-from pydantic import EmailStr
-
 
 class RBPassword:
     def __init__(
